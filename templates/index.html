@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retreaver RTB API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Retreaver RTB API Integration</h1>
+        <form action="/get_bid" method="get">
+            <label for="caller_number">Enter Caller Number:</label>
+            <input type="text" id="caller_number" name="caller_number" required>
+            <button type="submit">Get Bid</button>
+        </form>
+
+        {% if bid_data %}
+        <div class="result">
+            <h2>Bid Results</h2>
+            <p><strong>Caller Number:</strong> {{ caller_number }}</p>
+            <p><strong>Bid ID:</strong> {{ bid_data.get('bid_id', 'N/A') }}</p>
+            <p><strong>Destination Number:</strong> {{ bid_data.get('destination_number', 'N/A') }}</p>
+            <p><strong>Bid Price:</strong> {{ bid_data.get('bid_price', 'N/A') }}</p>
+            <p><strong>Status:</strong> {{ bid_data.get('status', 'N/A') }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
